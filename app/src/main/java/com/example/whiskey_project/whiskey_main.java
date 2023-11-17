@@ -91,14 +91,14 @@ public class whiskey_main extends Activity{
     private Runnable counterUpdater = new Runnable() {
         @Override
         public void run() {
-            if (isVolumeDownPressed) {
+            if (isVolumeDownPressed && counterTemp > 0) {
                 counterTemp--;
                 counterText.setText(counterTemp + "%");
                 // Adjust the delay to control the acceleration speed
                 handler.postAtTime(this, SystemClock.uptimeMillis() + 100);
             }
 
-            if (isVolumeUpPressed) {
+            if (isVolumeUpPressed && counterTemp < 100) {
                 counterTemp++;
                 counterText.setText(counterTemp + "%");
                 // Adjust the delay to control the acceleration speed
