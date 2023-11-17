@@ -9,7 +9,7 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 
-public class whiskey_main extends Activity{
+public class Whiskey_main extends Activity{
 
     private SeekBar seekBar;
     private TextView counterText;

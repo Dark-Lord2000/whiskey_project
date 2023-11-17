@@ -15,7 +15,7 @@
         android:layout_centerInParent="true"
         android:gravity="center"
         android:padding="5dp"
-        android:text="Hello World"
+        android:text="Whiskey Project"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <SeekBar
@@ -30,6 +30,5 @@
         android:layout_marginBottom="5dp"
         android:rotation="270"
         android:visibility="visible" />
-
 
 </RelativeLayout>

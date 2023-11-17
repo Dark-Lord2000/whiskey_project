@@ -13,7 +13,7 @@
         android:theme="@style/Theme.Whiskey_project"
         tools:targetApi="31">
         <activity
-            android:name="com.example.whiskey_project.whiskey_main"
+            android:name="com.example.whiskey_project.Whiskey_main"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
