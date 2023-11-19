@@ -39,7 +39,7 @@
             <TableRow>
 
                 <TextView
-                    android:id="@+id/spinParticipantCodeName"
+                    android:id="@+id/paramLabelParticipantCode"
                     android:gravity="right"
                     android:paddingRight="5dp"
                     android:text="Participant Code"
@@ -55,10 +55,10 @@
             <TableRow>
 
                 <TextView
-                    android:id="@+id/paramLabelGain"
+                    android:id="@+id/paramLabelSpinSessionCode"
                     android:gravity="right"
                     android:paddingRight="5dp"
-                    android:text="Test"
+                    android:text="Session"
                     android:textAppearance="?android:attr/textAppearanceMedium"/>
 
                 <Spinner
@@ -71,10 +71,10 @@
             <TableRow>
 
                 <TextView
-                    android:id="@+id/paramLabelPathType"
+                    android:id="@+id/paramLabelGroupCode"
                     android:gravity="right"
                     android:paddingRight="5dp"
-                    android:text="Test"
+                    android:text="Group"
                     android:textAppearance="?android:attr/textAppearanceMedium"/>
 
                 <Spinner
@@ -87,34 +87,17 @@
             <TableRow>
 
                 <TextView
-                    android:id="@+id/paramLabelPathWidth"
+                    android:id="@+id/paramLabelHand"
                     android:gravity="right"
                     android:paddingRight="5dp"
-                    android:text="Test"
-                    android:textAppearance="?android:attr/textAppearanceMedium"/>
-
-                <Spinner
-                    android:id="@+id/conditionCode"
-                    android:layout_weight="1"
-                    android:gravity="left"
-                    android:textAppearance="?android:attr/textAppearanceMedium"/>
-            </TableRow>
-
-            <!-- add label and spinner for number of laps -->
-            <TableRow>
-
-                <TextView
-                    android:id="@+id/paramLabelLapNum"
-                    android:gravity="right"
-                    android:paddingRight="5dp"
-                    android:text="Test"
+                    android:text="Hand"
                     android:textAppearance="?android:attr/textAppearanceMedium"/>
 
                 <Spinner
                     android:id="@+id/spinHand"
                     android:layout_weight="1"
                     android:gravity="left"
-                    android:textAppearance="?android:attr/textAppearanceMedium" />
+                    android:textAppearance="?android:attr/textAppearanceMedium"/>
             </TableRow>
 
         </TableLayout>

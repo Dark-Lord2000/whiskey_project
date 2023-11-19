@@ -21,11 +21,21 @@ public class Whiskey_main extends Activity{
     private boolean isVolumeUpPressed;
     private boolean firstKeyEvent = true;
 
+    // parameters from Setup dialog
+    String participantCode, sessionCode, groupCode, hand;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         initialize();
+
+        // get parameters from setup
+        Bundle b  = getIntent().getExtras();
+        participantCode = b.getString("participantCode");
+        sessionCode= b.getString("sessionCode");
+        groupCode = b.getString("groupCode");
+        hand = b.getString("hand");
     }
 
     private void initialize() {
