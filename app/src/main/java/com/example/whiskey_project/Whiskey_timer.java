@@ -21,10 +21,10 @@ public class Whiskey_timer {
         long elapsed;
 
         if(running){
-            elapsed = (System.currentTimeMillis() - startTime) / 1000;
+            elapsed = (System.currentTimeMillis() - startTime);
         }
         else {
-            elapsed = (stopTime - startTime) / 1000;
+            elapsed = (stopTime - startTime);
         }
 
         return elapsed;

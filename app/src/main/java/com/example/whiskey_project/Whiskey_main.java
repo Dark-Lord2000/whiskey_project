@@ -45,7 +45,6 @@ public class Whiskey_main extends Activity{
         }
         @Override
         public void onStartTrackingTouch(SeekBar seekBar) {
-
             whiskeyTimer.start();
         }
         @Override
@@ -53,7 +52,7 @@ public class Whiskey_main extends Activity{
             handler.postDelayed(() -> {
                 if (counterTemp == counterTemp) { //Replace second counterTemp with actual test value
                     whiskeyTimer.stop();
-                    Log.d("TimerOutput", "Elapsed time: " + whiskeyTimer.elapsedTime() + " seconds");
+                    Log.d("TimerOutput", "Elapsed time: " + whiskeyTimer.elapsedTime() + " milliseconds");
                 }
             }, 800);
         }
@@ -113,7 +112,7 @@ public class Whiskey_main extends Activity{
             handler.postDelayed(() -> {
                 if (counterTemp == counterTemp) { //Replace second counterTemp with actual test value
                     whiskeyTimer.stop();
-                    Log.d("TimerOutput", "Elapsed time: " + whiskeyTimer.elapsedTime() + " seconds");
+                    Log.d("TimerOutput", "Elapsed time: " + whiskeyTimer.elapsedTime() + " milliseconds");
                 }
             }, 800);
         }
@@ -126,7 +125,7 @@ public class Whiskey_main extends Activity{
             handler.postDelayed(() -> {
                 if (counterTemp == counterTemp) { //Replace second counterTemp with actual test value
                     whiskeyTimer.stop();
-                    Log.d("TimerOutput", "Elapsed time: " + whiskeyTimer.elapsedTime() + " seconds");
+                    Log.d("TimerOutput", "Elapsed time: " + whiskeyTimer.elapsedTime() + " milliseconds");
                 }
             }, 800);
         }
