@@ -39,10 +39,10 @@
             <TableRow>
 
                 <TextView
-                    android:id="@+id/paramLabelOrderOfControl"
+                    android:id="@+id/spinParticipantCodeName"
                     android:gravity="right"
                     android:paddingRight="5dp"
-                    android:text="Test"
+                    android:text="Participant Code"
                     android:textAppearance="?android:attr/textAppearanceMedium"/>
 
                 <Spinner
@@ -133,7 +133,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:onClick="clickOK"
-                android:text="Test"
+                android:text="Ok"
                 android:textAppearance="?android:attr/textAppearanceMedium">
             </Button>
 
@@ -143,7 +143,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:onClick="clickExit"
-                android:text="Test"
+                android:text="Exit"
                 android:textAppearance="?android:attr/textAppearanceMedium">
             </Button>
         </LinearLayout>
