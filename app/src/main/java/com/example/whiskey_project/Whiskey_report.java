@@ -18,7 +18,8 @@ public class Whiskey_report extends Activity {
     String participantCode, sessionCode, groupCode, hand;
     // get parameters selected by user from setup dialog
     // get parameters from setup
-int trial;
+
+int trial1,trial2,trial3,trial4;
 int speed;
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,7 +28,11 @@ int speed;
         sessionCode= b.getString("sessionCode");
         groupCode = b.getString("groupCode");
         hand = b.getString("hand");
+        trial1 = b.getInt( "trial1");
 
+        trial2 = b.getInt( "trial2");
+        trial3 = b.getInt( "trial3");
+        trial4 = b.getInt( "trial4");
 
         setContentView(R.layout.report);
 
@@ -45,7 +50,7 @@ int speed;
         TextView result4View = findViewById(R.id.paramResult4);
         result4View.setText(String.valueOf(speed));
 
-        String content = "poop";// need to build
+        String content = buildtxt(participantCode,sessionCode,groupCode,hand,trial1,trial2,trial3,trial4);// need to build
         String filename= String.format("%s-%s-%s-%s",participantCode,sessionCode,groupCode );
     // make a working directory (if necessary) to store data files
         try {
@@ -81,5 +86,16 @@ int speed;
         finish();
     }
 
+public String buildtxt(String participantCode,String sessionCode,String groupCode,String hand,int trial1,int trial2,int trial3 ,int trial4){
 
+
+    String txt = String.format("PartcipantCode: %s Group Code: %s \nTrial 1 %s \nTrial 2 %s \nTrial 3 %s \nTrial 4 %s \n " , participantCode,groupCode,trial1,trial2,trial3,trial4);
+
+
+    return txt ;
+
+
+
+
+}
 }
