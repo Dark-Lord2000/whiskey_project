@@ -1,5 +1,6 @@
 package com.example.whiskey_project;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.app.Activity;
 import android.os.Handler;
@@ -18,12 +19,14 @@ public class Whiskey_main extends Activity{
     private Handler handler = new Handler();
     int counterTemp = 50;
     int trialNum = 1;
+    long[] trialTimes = {0,0,0,0};
     private boolean isVolumeDownPressed;
     private boolean isVolumeUpPressed;
     private boolean firstKeyEvent;
+    int trialLoopValue = 0; // Shared Loop value
 
     // parameters from Setup dialog
-    String participantCode, sessionCode, groupCode, hand;
+     String participantCode, sessionCode, groupCode, hand;
 
     int[] resultNum = {0, 0, 0, 0};
 
@@ -32,13 +35,6 @@ public class Whiskey_main extends Activity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         initialize();
-
-        // get parameters from setup
-        Bundle b  = getIntent().getExtras();
-        participantCode = b.getString("participantCode");
-        sessionCode= b.getString("sessionCode");
-        groupCode = b.getString("groupCode");
-        hand = b.getString("hand");
 
         Log.d("groupCode", "groupCode: " + groupCode);
         if (groupCode.equals("G01")){
@@ -62,10 +58,16 @@ public class Whiskey_main extends Activity{
     }
 
     private void initialize() {
+        // get parameters from setup
+        Bundle b  = getIntent().getExtras();
+        participantCode = b.getString("participantCode");
+        sessionCode= b.getString("sessionCode");
+        groupCode = b.getString("groupCode");
+        hand = b.getString("hand");
+
         counterText = (TextView) findViewById(R.id.counterText);
         groupText = (TextView) findViewById(R.id.groupNum);
         trialText = (TextView) findViewById(R.id.trialNum);
-
         seekBar = (SeekBar) findViewById(R.id.seekBar);
         // setup seekBar listener
         seekBar.setOnSeekBarChangeListener(seekBarChangeListener);
@@ -94,21 +96,21 @@ public class Whiskey_main extends Activity{
             Log.d("TimerOutput", "Elapsed time: " + whiskeyTimer.elapsedTime() + " milliseconds");
 
             handler.postDelayed(() -> {
-                for (int i = 0; i < resultNum.length; i++){
-                    if (seekBar.getProgress() == resultNum[i]) { //Replace second counterTemp with actual test value
+                if (seekBar.getProgress() == resultNum[trialLoopValue]) { //Replace second counterTemp with actual test value
+                    if (trialLoopValue < 3){
                         trialNum++;
-                        trialText.setText("Trial " + trialNum + ": Get the number " + resultNum[i + 1]);
-                        whiskeyTimer.stop();
-                        Log.d("Result", "Success!");
-
-                        Log.d("TimerOutput", "Elapsed time: " + whiskeyTimer.elapsedTime() + " milliseconds");
-                        firstKeyEvent = true;
-                        if (i == resultNum.length){
-                            break;
-                        }
+                        trialText.setText("Trial " + trialNum + ": Get the number " + resultNum[trialLoopValue + 1]);
+                    }
+                    whiskeyTimer.stop();
+                    Log.d("Result", "Success!");
+                    Log.d("TimerOutput", "Elapsed time: " + whiskeyTimer.elapsedTime() + " milliseconds");
+                    firstKeyEvent = true; // Set true for next trial
+                    trialLoopValue++;
+                    if (trialLoopValue == resultNum.length){
+                        sendToReport();
                     }
                 }
-            }, 800);
+            }, 500);
         }
     };
 
@@ -158,53 +160,56 @@ public class Whiskey_main extends Activity{
 
     @Override
     public boolean onKeyUp(int keyCode, KeyEvent event) {
+
+
         if (keyCode == KeyEvent.KEYCODE_VOLUME_DOWN) {
+            Log.d("Result", "KEY_VOLUME_DOWN");
             // Stop the acceleration when the button is released
             isVolumeDownPressed = false;
             handler.removeCallbacks(counterUpdater);
             // Post a delayed callback to check after 500ms
             handler.postDelayed(() -> {
-                for (int i = 0; i < resultNum.length; i++){
-                    if (counterTemp == resultNum[i]) { //Replace second counterTemp with actual test value
-                        trialNum++;
-                        trialText.setText("Trial " + trialNum + ": Get the number " + resultNum[i + 1]);
+                    if (counterTemp == resultNum[trialLoopValue]) { //Replace second counterTemp with actual test value
+                        if (trialLoopValue < 3){
+                            trialNum++;
+                            trialText.setText("Trial " + trialNum + ": Get the number " + resultNum[trialLoopValue + 1]);
+                        }
                         whiskeyTimer.stop();
                         Log.d("Result", "Success!");
                         Log.d("TimerOutput", "Elapsed time: " + whiskeyTimer.elapsedTime() + " milliseconds");
-                        firstKeyEvent = true;
-                        if (i == resultNum.length){
-                            break;
+                        firstKeyEvent = true; // Set true for next trial
+                        trialLoopValue++;
+                        if (trialLoopValue == resultNum.length){
+                            sendToReport();
                         }
                     }
-                }
-            }, 800);
+
+            }, 500);
         }
 
         if (keyCode == KeyEvent.KEYCODE_VOLUME_UP) {
+            Log.d("Result", "KEY_VOLUME_UP");
             // Stop the acceleration when the button is released
             isVolumeUpPressed = false;
             handler.removeCallbacks(counterUpdater);
             // Post a delayed callback to check after 800ms
             handler.postDelayed(() -> {
-                for (int i = 0; i < resultNum.length; i++){
-                    if (counterTemp == resultNum[i]) { //Replace second counterTemp with actual test value
-                        trialNum++;
-                        trialText.setText("Trial " + trialNum + ": Get the number " + resultNum[i + 1]);
+                    if (counterTemp == resultNum[trialLoopValue]) { //Replace second counterTemp with actual test value
+                        if (trialLoopValue < 3){
+                            trialNum++;
+                            trialText.setText("Trial " + trialNum + ": Get the number " + resultNum[trialLoopValue + 1]);
+                        }
                         whiskeyTimer.stop();
                         Log.d("Result", "Success!");
                         Log.d("TimerOutput", "Elapsed time: " + whiskeyTimer.elapsedTime() + " milliseconds");
-                        firstKeyEvent = true;
-                        if (i == resultNum.length){
-                            break;
+                        firstKeyEvent = true; // Set true for next trial
+                        trialLoopValue++;
+                        if (trialLoopValue == resultNum.length){
+                            sendToReport();
                         }
                     }
-                }
-//                if (counterTemp == resultNum[0]) { //Replace second counterTemp with actual test value
-//                    whiskeyTimer.stop();
-//                    Log.d("TimerOutput", "Elapsed time: " + whiskeyTimer.elapsedTime() + " milliseconds");
-//                    firstKeyEvent = true; //Set true for next trial
-//                }
-            }, 800);
+
+            }, 500);
 
         }
         return super.onKeyUp(keyCode, event);
@@ -228,5 +233,21 @@ public class Whiskey_main extends Activity{
             }
         }
     };
+
+    public void sendToReport() {
+        Log.d("Result", "Sending to Whiskey_report");
+        Bundle b2 = new Bundle();
+        b2.putString("participantCode", participantCode);
+        b2.putString("sessionCode", sessionCode);
+        b2.putString("groupCode", groupCode);
+        b2.putString("hand", hand);
+        b2.putLongArray("trialTimes", trialTimes);
+
+        Intent i = new Intent(Whiskey_main.this, Whiskey_report.class);
+        i.putExtras(b2);
+        startActivity(i);
+    }
+
+
 
 }

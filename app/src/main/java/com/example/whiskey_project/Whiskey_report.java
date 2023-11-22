@@ -18,23 +18,26 @@ public class Whiskey_report extends Activity {
     String participantCode, sessionCode, groupCode, hand;
     // get parameters selected by user from setup dialog
     // get parameters from setup
+    long trials[];
 
 int trial1,trial2,trial3,trial4;
 int speed;
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.report);
         Bundle b  = getIntent().getExtras();
         participantCode = b.getString("participantCode");
         sessionCode= b.getString("sessionCode");
         groupCode = b.getString("groupCode");
         hand = b.getString("hand");
-        trial1 = b.getInt( "trial1");
+        trials = b.getLongArray("trials");
+//        trial1 = b.getInt( "trial1");
+//
+//        trial2 = b.getInt( "trial2");
+//        trial3 = b.getInt( "trial3");
+//        trial4 = b.getInt( "trial4");
 
-        trial2 = b.getInt( "trial2");
-        trial3 = b.getInt( "trial3");
-        trial4 = b.getInt( "trial4");
 
-        setContentView(R.layout.report);
 
 
         TextView resultID = findViewById(R.id.paramID);
@@ -51,7 +54,7 @@ int speed;
         result4View.setText(String.valueOf(speed));
 
         String content = buildtxt(participantCode,sessionCode,groupCode,hand,trial1,trial2,trial3,trial4);// need to build
-        String filename= String.format("%s-%s-%s-%s",participantCode,sessionCode,groupCode );
+        String filename= String.format("%s-%s-%s",participantCode,sessionCode,groupCode );
     // make a working directory (if necessary) to store data files
         try {
         ContentValues values = new ContentValues();
