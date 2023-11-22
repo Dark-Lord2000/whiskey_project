@@ -14,9 +14,10 @@ public class Whiskey_main extends Activity{
 
     private Whiskey_timer whiskeyTimer;
     private SeekBar seekBar;
-    private TextView counterText;
+    private TextView counterText,groupText, trialText;
     private Handler handler = new Handler();
     int counterTemp = 50;
+    int trialNum = 1;
     private boolean isVolumeDownPressed;
     private boolean isVolumeUpPressed;
     private boolean firstKeyEvent = true;
@@ -41,12 +42,14 @@ public class Whiskey_main extends Activity{
 
         Log.d("groupCode", "groupCode: " + groupCode);
         if (groupCode.equals("G01")){
+            groupText.setText("Group 1");
             resultNum[0] = 23;
             resultNum[1] = 94;
             resultNum[2] = 36;
             resultNum[3] = 19;
 
         } else {
+            groupText.setText("Group 2");
             resultNum[0] = 85;
             resultNum[1] = 12;
             resultNum[2] = 61;
@@ -54,10 +57,15 @@ public class Whiskey_main extends Activity{
         }
         Log.d("resultNum", "resultNum: " + resultNum[0] + ", " + resultNum[1] + ", " + resultNum[2] + ", "+ resultNum[3]);
 
+        trialText.setText("Trial " + trialNum + ": Get the number " + resultNum[0]);
+
     }
 
     private void initialize() {
         counterText = (TextView) findViewById(R.id.counterText);
+        groupText = (TextView) findViewById(R.id.groupNum);
+        trialText = (TextView) findViewById(R.id.trialNum);
+
         seekBar = (SeekBar) findViewById(R.id.seekBar);
         // setup seekBar listener
         seekBar.setOnSeekBarChangeListener(seekBarChangeListener);
@@ -78,13 +86,20 @@ public class Whiskey_main extends Activity{
         @Override
         public void onStopTrackingTouch(SeekBar seekBar) {
             Log.d("Seek", "Seekbar Progress: " + seekBar.getProgress());
+            Log.d("TimerOutput", "Elapsed time: " + whiskeyTimer.elapsedTime() + " milliseconds");
+
             handler.postDelayed(() -> {
                 for (int i = 0; i < resultNum.length; i++){
                     if (seekBar.getProgress() == resultNum[i]) { //Replace second counterTemp with actual test value
+                        trialNum++;
+                        trialText.setText("Trial " + trialNum + ": Get the number " + resultNum[i + 1]);
                         whiskeyTimer.stop();
                         Log.d("Result", "Success!");
 
                         Log.d("TimerOutput", "Elapsed time: " + whiskeyTimer.elapsedTime() + " milliseconds");
+                        if (i == resultNum.length){
+                            break;
+                        }
                     }
                 }
             }, 800);
