@@ -24,7 +24,7 @@ public class Whiskey_main extends Activity{
     // parameters from Setup dialog
     String participantCode, sessionCode, groupCode, hand;
 
-    int[] resultNum = {0, 22, 43, 98};
+    int[] resultNum = {0, 0, 0, 0};
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -39,21 +39,20 @@ public class Whiskey_main extends Activity{
         groupCode = b.getString("groupCode");
         hand = b.getString("hand");
 
-        if (groupCode == "G01"){
+        Log.d("groupCode", "groupCode: " + groupCode);
+        if (groupCode.equals("G01")){
             resultNum[0] = 23;
             resultNum[1] = 94;
             resultNum[2] = 36;
             resultNum[3] = 19;
-            Log.d("resultNum", "resultNum: " + resultNum[0] + ", " + resultNum[1] + ", " + resultNum[2] + ", "+ resultNum[3]);
 
-        } else if (groupCode == "GO2"){
+        } else {
             resultNum[0] = 85;
             resultNum[1] = 12;
             resultNum[2] = 61;
             resultNum[3] = 43;
         }
-
-
+        Log.d("resultNum", "resultNum: " + resultNum[0] + ", " + resultNum[1] + ", " + resultNum[2] + ", "+ resultNum[3]);
 
     }
 
