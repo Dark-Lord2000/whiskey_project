@@ -24,6 +24,8 @@ public class Whiskey_main extends Activity{
     // parameters from Setup dialog
     String participantCode, sessionCode, groupCode, hand;
 
+    int[] resultNum = {0, 22, 43, 98};
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +38,23 @@ public class Whiskey_main extends Activity{
         sessionCode= b.getString("sessionCode");
         groupCode = b.getString("groupCode");
         hand = b.getString("hand");
+
+        if (groupCode == "G01"){
+            resultNum[0] = 23;
+            resultNum[1] = 94;
+            resultNum[2] = 36;
+            resultNum[3] = 19;
+            Log.d("resultNum", "resultNum: " + resultNum[0] + ", " + resultNum[1] + ", " + resultNum[2] + ", "+ resultNum[3]);
+
+        } else if (groupCode == "GO2"){
+            resultNum[0] = 85;
+            resultNum[1] = 12;
+            resultNum[2] = 61;
+            resultNum[3] = 43;
+        }
+
+
+
     }
 
     private void initialize() {
@@ -59,10 +78,15 @@ public class Whiskey_main extends Activity{
         }
         @Override
         public void onStopTrackingTouch(SeekBar seekBar) {
+            Log.d("Seek", "Seekbar Progress: " + seekBar.getProgress());
             handler.postDelayed(() -> {
-                if (counterTemp == counterTemp) { //Replace second counterTemp with actual test value
-                    whiskeyTimer.stop();
-                    Log.d("TimerOutput", "Elapsed time: " + whiskeyTimer.elapsedTime() + " milliseconds");
+                for (int i = 0; i < resultNum.length; i++){
+                    if (seekBar.getProgress() == resultNum[i]) { //Replace second counterTemp with actual test value
+                        whiskeyTimer.stop();
+                        Log.d("Result", "Success!");
+
+                        Log.d("TimerOutput", "Elapsed time: " + whiskeyTimer.elapsedTime() + " milliseconds");
+                    }
                 }
             }, 800);
         }
