@@ -20,7 +20,7 @@ public class Whiskey_main extends Activity{
     int trialNum = 1;
     private boolean isVolumeDownPressed;
     private boolean isVolumeUpPressed;
-    private boolean firstKeyEvent = true;
+    private boolean firstKeyEvent;
 
     // parameters from Setup dialog
     String participantCode, sessionCode, groupCode, hand;
@@ -70,6 +70,7 @@ public class Whiskey_main extends Activity{
         // setup seekBar listener
         seekBar.setOnSeekBarChangeListener(seekBarChangeListener);
         whiskeyTimer = new Whiskey_timer();
+        firstKeyEvent = true;
     }
 
     // SeekBar/Slider function
@@ -81,7 +82,11 @@ public class Whiskey_main extends Activity{
         }
         @Override
         public void onStartTrackingTouch(SeekBar seekBar) {
-            whiskeyTimer.start();
+            if (firstKeyEvent == true) {
+                firstKeyEvent = false;
+                whiskeyTimer.start();
+            }
+
         }
         @Override
         public void onStopTrackingTouch(SeekBar seekBar) {
@@ -97,6 +102,7 @@ public class Whiskey_main extends Activity{
                         Log.d("Result", "Success!");
 
                         Log.d("TimerOutput", "Elapsed time: " + whiskeyTimer.elapsedTime() + " milliseconds");
+                        firstKeyEvent = true;
                         if (i == resultNum.length){
                             break;
                         }
@@ -158,9 +164,18 @@ public class Whiskey_main extends Activity{
             handler.removeCallbacks(counterUpdater);
             // Post a delayed callback to check after 500ms
             handler.postDelayed(() -> {
-                if (counterTemp == counterTemp) { //Replace second counterTemp with actual test value
-                    whiskeyTimer.stop();
-                    Log.d("TimerOutput", "Elapsed time: " + whiskeyTimer.elapsedTime() + " milliseconds");
+                for (int i = 0; i < resultNum.length; i++){
+                    if (counterTemp == resultNum[i]) { //Replace second counterTemp with actual test value
+                        trialNum++;
+                        trialText.setText("Trial " + trialNum + ": Get the number " + resultNum[i + 1]);
+                        whiskeyTimer.stop();
+                        Log.d("Result", "Success!");
+                        Log.d("TimerOutput", "Elapsed time: " + whiskeyTimer.elapsedTime() + " milliseconds");
+                        firstKeyEvent = true;
+                        if (i == resultNum.length){
+                            break;
+                        }
+                    }
                 }
             }, 800);
         }
@@ -169,13 +184,28 @@ public class Whiskey_main extends Activity{
             // Stop the acceleration when the button is released
             isVolumeUpPressed = false;
             handler.removeCallbacks(counterUpdater);
-            // Post a delayed callback to check after 500ms
+            // Post a delayed callback to check after 800ms
             handler.postDelayed(() -> {
-                if (counterTemp == counterTemp) { //Replace second counterTemp with actual test value
-                    whiskeyTimer.stop();
-                    Log.d("TimerOutput", "Elapsed time: " + whiskeyTimer.elapsedTime() + " milliseconds");
+                for (int i = 0; i < resultNum.length; i++){
+                    if (counterTemp == resultNum[i]) { //Replace second counterTemp with actual test value
+                        trialNum++;
+                        trialText.setText("Trial " + trialNum + ": Get the number " + resultNum[i + 1]);
+                        whiskeyTimer.stop();
+                        Log.d("Result", "Success!");
+                        Log.d("TimerOutput", "Elapsed time: " + whiskeyTimer.elapsedTime() + " milliseconds");
+                        firstKeyEvent = true;
+                        if (i == resultNum.length){
+                            break;
+                        }
+                    }
                 }
+//                if (counterTemp == resultNum[0]) { //Replace second counterTemp with actual test value
+//                    whiskeyTimer.stop();
+//                    Log.d("TimerOutput", "Elapsed time: " + whiskeyTimer.elapsedTime() + " milliseconds");
+//                    firstKeyEvent = true; //Set true for next trial
+//                }
             }, 800);
+
         }
         return super.onKeyUp(keyCode, event);
     }
