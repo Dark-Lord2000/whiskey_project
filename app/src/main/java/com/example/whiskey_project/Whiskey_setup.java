@@ -12,13 +12,13 @@ import android.widget.Spinner;
 
 //base code for setup page implementation taken from Demo_TiltBall
 public class Whiskey_setup extends Activity{
-    String[] PARTICIPANT_CODE = {"P99", "P01", "P02", "P03", "P04", "P05", "P06", "P07", "P08", "P09", "P10"};
-    String[] SESSION_CODE = {"S99", "S01", "S02", "S03", "S04", "S05", "S06", "S07", "S08"};
-    String[] GROUP_CODE= {"G99", "G01", "G02"};
+    String[] PARTICIPANT_CODE = {"P01", "P02", "P03", "P04", "P05", "P06", "P07", "P08", "P09", "P10"};
+    String[] SESSION_CODE = {"S01", "S02", "S03", "S04", "S05", "S06", "S07", "S08"};
+    String[] GROUP_CODE= {"G01P", "G02P", "G01", "G02"};
     Spinner spinParticipantCode;
     Spinner spinSessionCode, spinGroupCode, spinHand;
     SharedPreferences sp;
-    final static String[] HAND = {"left","Right"};
+    final static String[] HAND = {"Left","Right"};
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -40,6 +40,7 @@ public class Whiskey_setup extends Activity{
         spinHand = (Spinner) findViewById(R.id.spinHand);
         ArrayAdapter<CharSequence> adapter3 = new ArrayAdapter<>(this, R.layout.spinnerstyle, HAND);
         spinHand.setAdapter(adapter3);
+        spinHand.setSelection(1);
 
     }
 
@@ -63,7 +64,7 @@ public class Whiskey_setup extends Activity{
 
     }
 
-    /** Called when the "Exit" button is pressed. */
+    // Called when the "Exit" button is pressed.
     public void clickExit(View view)
     {
         super.onDestroy(); // cleanup

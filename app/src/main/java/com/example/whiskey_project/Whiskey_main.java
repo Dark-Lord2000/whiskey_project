@@ -26,9 +26,10 @@ public class Whiskey_main extends Activity{
     int trialLoopValue = 0; // Shared Loop value
 
     // parameters from Setup dialog
-     String participantCode, sessionCode, groupCode, hand;
+    String participantCode, sessionCode, groupCode, hand;
 
-    int[] resultNum = {0, 0, 0, 0};
+    // numbers that users will have to get in the trials
+    int[] resultNum = {23, 94, 36, 19};
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -37,20 +38,30 @@ public class Whiskey_main extends Activity{
         initialize();
 
         Log.d("groupCode", "groupCode: " + groupCode);
+
+        /*
+        Different group number will appear depending on which
+        one was selected in setup.
+        Practice groups will have different result numbers.
+         */
         if (groupCode.equals("G01")){
             groupText.setText("Group 1");
-            resultNum[0] = 23;
-            resultNum[1] = 94;
-            resultNum[2] = 36;
-            resultNum[3] = 19;
-
-        } else {
+        } else if (groupCode.equals("G02")){
             groupText.setText("Group 2");
+        } else if (groupCode.equals(("G01P"))){
+            groupText.setText("Group 1 Practice");
+            resultNum[0] = 85;
+            resultNum[1] = 12;
+            resultNum[2] = 61;
+            resultNum[3] = 43;
+        } else {
+            groupText.setText("Group 2 Practice");
             resultNum[0] = 85;
             resultNum[1] = 12;
             resultNum[2] = 61;
             resultNum[3] = 43;
         }
+
         Log.d("resultNum", "resultNum: " + resultNum[0] + ", " + resultNum[1] + ", " + resultNum[2] + ", "+ resultNum[3]);
 
         trialText.setText("Trial " + trialNum + ": Get the number " + resultNum[0]);
@@ -93,19 +104,21 @@ public class Whiskey_main extends Activity{
         @Override
         public void onStopTrackingTouch(SeekBar seekBar) {
             Log.d("Seek", "Seekbar Progress: " + seekBar.getProgress());
-            Log.d("TimerOutput", "Elapsed time: " + whiskeyTimer.elapsedTime() + " milliseconds");
 
             handler.postDelayed(() -> {
-                if (seekBar.getProgress() == resultNum[trialLoopValue]) { //Replace second counterTemp with actual test value
+                if (seekBar.getProgress() == resultNum[trialLoopValue]) {
                     if (trialLoopValue < 3){
                         trialNum++;
                         trialText.setText("Trial " + trialNum + ": Get the number " + resultNum[trialLoopValue + 1]);
                     }
                     whiskeyTimer.stop();
                     Log.d("Result", "Success!");
-                    Log.d("TimerOutput", "Elapsed time: " + whiskeyTimer.elapsedTime() + " milliseconds");
+
                     firstKeyEvent = true; // Set true for next trial
+                    trialTimes[trialLoopValue] = whiskeyTimer.elapsedTime();
+                    Log.d("TimerOutput", "Elapsed time: " + whiskeyTimer.elapsedTime() + " milliseconds");
                     trialLoopValue++;
+                    seekBar.setProgress(0);
                     if (trialLoopValue == resultNum.length){
                         sendToReport();
                     }
@@ -177,6 +190,7 @@ public class Whiskey_main extends Activity{
                         whiskeyTimer.stop();
                         Log.d("Result", "Success!");
                         Log.d("TimerOutput", "Elapsed time: " + whiskeyTimer.elapsedTime() + " milliseconds");
+                        trialTimes[trialLoopValue] = whiskeyTimer.elapsedTime();
                         firstKeyEvent = true; // Set true for next trial
                         trialLoopValue++;
                         if (trialLoopValue == resultNum.length){
@@ -204,6 +218,7 @@ public class Whiskey_main extends Activity{
                         Log.d("TimerOutput", "Elapsed time: " + whiskeyTimer.elapsedTime() + " milliseconds");
                         firstKeyEvent = true; // Set true for next trial
                         trialLoopValue++;
+                        seekBar.setProgress(0);
                         if (trialLoopValue == resultNum.length){
                             sendToReport();
                         }

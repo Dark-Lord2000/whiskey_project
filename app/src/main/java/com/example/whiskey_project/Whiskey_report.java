@@ -18,10 +18,9 @@ public class Whiskey_report extends Activity {
     String participantCode, sessionCode, groupCode, hand;
     // get parameters selected by user from setup dialog
     // get parameters from setup
-    long trials[];
+    long trialTimes[];
 
-int trial1,trial2,trial3,trial4;
-int speed;
+long trial1,trial2,trial3,trial4;
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.report);
@@ -30,12 +29,11 @@ int speed;
         sessionCode= b.getString("sessionCode");
         groupCode = b.getString("groupCode");
         hand = b.getString("hand");
-        trials = b.getLongArray("trials");
-//        trial1 = b.getInt( "trial1");
-//
-//        trial2 = b.getInt( "trial2");
-//        trial3 = b.getInt( "trial3");
-//        trial4 = b.getInt( "trial4");
+        trialTimes = b.getLongArray("trials");
+        trial1 = trialTimes[0];
+        trial2 = trialTimes[1];
+        trial3 = trialTimes[2];
+        trial4 = trialTimes[3];
 
 
 
@@ -43,17 +41,17 @@ int speed;
         TextView resultID = findViewById(R.id.paramID);
         resultID.setText(String.format(participantCode+"" + sessionCode +""+groupCode));
         TextView result1View = findViewById(R.id.paramResult1);
-        result1View.setText(String.valueOf(speed));
+        result1View.setText(String.valueOf(trial1));
 
 
         TextView result2View = findViewById(R.id.paramResult2);
-        result2View.setText(String.valueOf(speed));
+        result2View.setText(String.valueOf(trial2));
         TextView result3View = findViewById(R.id.paramResult3);
-        result3View.setText(String.valueOf(speed));
+        result3View.setText(String.valueOf(trial3));
         TextView result4View = findViewById(R.id.paramResult4);
-        result4View.setText(String.valueOf(speed));
+        result4View.setText(String.valueOf(trial4));
 
-        String content = buildtxt(participantCode,sessionCode,groupCode,hand,trial1,trial2,trial3,trial4);// need to build
+        //String content = buildtxt(participantCode,sessionCode,groupCode,hand,trial1,trial2,trial3,trial4);// need to build
         String filename= String.format("%s-%s-%s",participantCode,sessionCode,groupCode );
     // make a working directory (if necessary) to store data files
         try {
@@ -69,7 +67,7 @@ int speed;
 
         OutputStream outputStream = getContentResolver().openOutputStream(uri);
 
-        outputStream.write(content.getBytes());
+        //outputStream.write(content.getBytes());
 
         outputStream.close();
 
