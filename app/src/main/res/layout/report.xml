@@ -51,7 +51,7 @@
                     android:id="@+id/paramLabelResult1"
                     android:gravity="right"
                     android:paddingRight="5dp"
-                    android:text="Trial 1"
+                    android:text="Trial 1: "
                     android:textAppearance="?android:attr/textAppearanceMedium" />
 
                 <TextView
@@ -69,7 +69,7 @@
                     android:id="@+id/paramLabelResult2"
                     android:gravity="right"
                     android:paddingRight="5dp"
-                    android:text="Trial 2"
+                    android:text="Trial 2: "
                     android:textAppearance="?android:attr/textAppearanceMedium" />
 
                 <TextView
@@ -87,7 +87,7 @@
                     android:id="@+id/paramLabelResult3"
                     android:gravity="right"
                     android:paddingRight="5dp"
-                    android:text="Trial 3"
+                    android:text="Trial 3: "
                     android:textAppearance="?android:attr/textAppearanceMedium" />
 
                 <TextView
@@ -102,10 +102,10 @@
             <TableRow>
 
                 <TextView
-                    android:id="@+id/paramLabelResult3"
+                    android:id="@+id/paramLabelResult4"
                     android:gravity="right"
                     android:paddingRight="5dp"
-                    android:text="Trial 4"
+                    android:text="Trial 4: "
                     android:textAppearance="?android:attr/textAppearanceMedium" />
 
                 <TextView
