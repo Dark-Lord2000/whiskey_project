@@ -91,7 +91,7 @@ public String buildtxt(String participantCode,String sessionCode,String groupCod
 
 
     String txt = String.format("PartcipantCode: %s Group Code: %s session: code %s hand: %s \nTrial 1 %s \nTrial 2 %s \nTrial 3 %s \nTrial 4 %s \n " , participantCode,groupCode, sessionCode,hand,trialTimes[0],trialTimes[1],trialTimes[2],trialTimes[3]);
-    Log.d("trial", ""+trialTimes[0]+""+trialTimes[1]+""+trialTimes[2]+""+trialTimes[3]);
+
 
     return txt ;
 
