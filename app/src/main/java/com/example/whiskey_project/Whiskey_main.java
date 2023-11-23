@@ -17,7 +17,7 @@ public class Whiskey_main extends Activity{
     private SeekBar seekBar;
     private TextView counterText,groupText, trialText;
     private Handler handler = new Handler();
-    int counterTemp = 50;
+    int counterTemp = 0;
     int trialNum = 1;
     long[] trialTimes = {0,0,0,0};
     private boolean isVolumeDownPressed;
@@ -48,6 +48,7 @@ public class Whiskey_main extends Activity{
             groupText.setText("Group 1");
         } else if (groupCode.equals("G02")){
             groupText.setText("Group 2");
+            seekBar.setVisibility(seekBar.INVISIBLE);
         } else if (groupCode.equals(("G01P"))){
             groupText.setText("Group 1 Practice");
             resultNum[0] = 85;
@@ -55,6 +56,7 @@ public class Whiskey_main extends Activity{
             resultNum[2] = 61;
             resultNum[3] = 43;
         } else {
+            seekBar.setVisibility(seekBar.INVISIBLE);
             groupText.setText("Group 2 Practice");
             resultNum[0] = 85;
             resultNum[1] = 12;
@@ -218,7 +220,7 @@ public class Whiskey_main extends Activity{
                         Log.d("TimerOutput", "Elapsed time: " + whiskeyTimer.elapsedTime() + " milliseconds");
                         firstKeyEvent = true; // Set true for next trial
                         trialLoopValue++;
-                        seekBar.setProgress(0);
+                        counterTemp = 0;
                         if (trialLoopValue == resultNum.length){
                             sendToReport();
                         }
