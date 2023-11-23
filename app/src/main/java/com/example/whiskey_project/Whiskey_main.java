@@ -11,15 +11,15 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 
-public class Whiskey_main extends Activity{
+public class Whiskey_main extends Activity {
 
     private Whiskey_timer whiskeyTimer;
     private SeekBar seekBar;
-    private TextView counterText,groupText, trialText;
+    private TextView counterText, groupText, trialText;
     private Handler handler = new Handler();
     int counterTemp = 0;
     int trialNum = 1;
-    long[] trialTimes = {0,0,0,0};
+    long[] trialTimes = {0, 0, 0, 0};
     private boolean isVolumeDownPressed;
     private boolean isVolumeUpPressed;
     private boolean firstKeyEvent;
@@ -44,12 +44,12 @@ public class Whiskey_main extends Activity{
         one was selected in setup.
         Practice groups will have different result numbers.
          */
-        if (groupCode.equals("G01")){
+        if (groupCode.equals("G01")) {
             groupText.setText("Group 1");
-        } else if (groupCode.equals("G02")){
+        } else if (groupCode.equals("G02")) {
             groupText.setText("Group 2");
             seekBar.setVisibility(seekBar.INVISIBLE);
-        } else if (groupCode.equals(("G01P"))){
+        } else if (groupCode.equals(("G01P"))) {
             groupText.setText("Group 1 Practice");
             resultNum[0] = 85;
             resultNum[1] = 12;
@@ -64,7 +64,7 @@ public class Whiskey_main extends Activity{
             resultNum[3] = 43;
         }
 
-        Log.d("resultNum", "resultNum: " + resultNum[0] + ", " + resultNum[1] + ", " + resultNum[2] + ", "+ resultNum[3]);
+        Log.d("resultNum", "resultNum: " + resultNum[0] + ", " + resultNum[1] + ", " + resultNum[2] + ", " + resultNum[3]);
 
         trialText.setText("Trial " + trialNum + ": Get the number " + resultNum[0]);
 
@@ -72,9 +72,9 @@ public class Whiskey_main extends Activity{
 
     private void initialize() {
         // get parameters from setup
-        Bundle b  = getIntent().getExtras();
+        Bundle b = getIntent().getExtras();
         participantCode = b.getString("participantCode");
-        sessionCode= b.getString("sessionCode");
+        sessionCode = b.getString("sessionCode");
         groupCode = b.getString("groupCode");
         hand = b.getString("hand");
 
@@ -95,6 +95,7 @@ public class Whiskey_main extends Activity{
             // Update the TextView with the current value of the SeekBar
             counterText.setText(progress + "%");
         }
+
         @Override
         public void onStartTrackingTouch(SeekBar seekBar) {
             if (firstKeyEvent == true) {
@@ -103,13 +104,14 @@ public class Whiskey_main extends Activity{
             }
 
         }
+
         @Override
         public void onStopTrackingTouch(SeekBar seekBar) {
             Log.d("Seek", "Seekbar Progress: " + seekBar.getProgress());
 
             handler.postDelayed(() -> {
                 if (seekBar.getProgress() == resultNum[trialLoopValue]) {
-                    if (trialLoopValue < 3){
+                    if (trialLoopValue < 3) {
                         trialNum++;
                         trialText.setText("Trial " + trialNum + ": Get the number " + resultNum[trialLoopValue + 1]);
                     }
@@ -122,7 +124,7 @@ public class Whiskey_main extends Activity{
                     trialTimes[trialLoopValue] = whiskeyTimer.elapsedTime();
                     trialLoopValue++;
                     seekBar.setProgress(0);
-                    if (trialLoopValue == resultNum.length){
+                    if (trialLoopValue == resultNum.length) {
                         sendToReport();
                     }
                 }
@@ -138,41 +140,41 @@ public class Whiskey_main extends Activity{
         if (groupCode.equals(("G01")) || groupCode.equals(("G01P"))) {
             return true;
         }
-            switch (keyCode) {
-                case KeyEvent.KEYCODE_VOLUME_DOWN:
-                    if (action == KeyEvent.ACTION_DOWN) {
-                        if (firstKeyEvent == true) {
-                            firstKeyEvent = false;
-                            whiskeyTimer.start();
-                        }
-
-                        if (counterTemp > 0) {
-                            counterTemp--;
-                            isVolumeDownPressed = true;
-                            counterText.setText(counterTemp + "%");
-                            handler.postDelayed(counterUpdater, 100); // Initial delay before acceleration starts
-                        }
-                        return true;
+        switch (keyCode) {
+            case KeyEvent.KEYCODE_VOLUME_DOWN:
+                if (action == KeyEvent.ACTION_DOWN) {
+                    if (firstKeyEvent == true) {
+                        firstKeyEvent = false;
+                        whiskeyTimer.start();
                     }
-                    break;
 
-                case KeyEvent.KEYCODE_VOLUME_UP:
-                    if (action == KeyEvent.ACTION_DOWN) {
-                        if (firstKeyEvent == true) {
-                            firstKeyEvent = false;
-                            whiskeyTimer.start();
-                        }
-
-                        if (counterTemp < 100) {
-                            counterTemp++;
-                            isVolumeUpPressed = true;
-                            counterText.setText(counterTemp + "%");
-                            handler.postDelayed(counterUpdater, 100); // Initial delay before acceleration starts
-                        }
-                        return true;
+                    if (counterTemp > 0) {
+                        counterTemp--;
+                        isVolumeDownPressed = true;
+                        counterText.setText(counterTemp + "%");
+                        handler.postDelayed(counterUpdater, 100); // Initial delay before acceleration starts
                     }
-                    break;
-            }
+                    return true;
+                }
+                break;
+
+            case KeyEvent.KEYCODE_VOLUME_UP:
+                if (action == KeyEvent.ACTION_DOWN) {
+                    if (firstKeyEvent == true) {
+                        firstKeyEvent = false;
+                        whiskeyTimer.start();
+                    }
+
+                    if (counterTemp < 100) {
+                        counterTemp++;
+                        isVolumeUpPressed = true;
+                        counterText.setText(counterTemp + "%");
+                        handler.postDelayed(counterUpdater, 100); // Initial delay before acceleration starts
+                    }
+                    return true;
+                }
+                break;
+        }
         return super.dispatchKeyEvent(e);
     }
 
@@ -187,24 +189,24 @@ public class Whiskey_main extends Activity{
             handler.removeCallbacks(counterUpdater);
             // Post a delayed callback to check after 500ms
             handler.postDelayed(() -> {
-                    if (counterTemp == resultNum[trialLoopValue]) { //Replace second counterTemp with actual test value
-                        if (trialLoopValue < 3){
-                            trialNum++;
-                            trialText.setText("Trial " + trialNum + ": Get the number " + resultNum[trialLoopValue + 1]);
-                        }
-                        whiskeyTimer.stop();
-                        Log.d("Result", "Success!");
-                        Log.d("TimerOutput", "Elapsed time: " + whiskeyTimer.elapsedTime() + " milliseconds");
-                        trialTimes[trialLoopValue] = whiskeyTimer.elapsedTime();
-                        firstKeyEvent = true; // Set true for next trial
-                        trialTimes[trialLoopValue] = whiskeyTimer.elapsedTime();
-                        trialLoopValue++;
-                        counterTemp = 0;
-                        counterText.setText(0 + "%");
-                        if (trialLoopValue == resultNum.length){
-                            sendToReport();
-                        }
+                if (counterTemp == resultNum[trialLoopValue]) { //Replace second counterTemp with actual test value
+                    if (trialLoopValue < 3) {
+                        trialNum++;
+                        trialText.setText("Trial " + trialNum + ": Get the number " + resultNum[trialLoopValue + 1]);
                     }
+                    whiskeyTimer.stop();
+                    Log.d("Result", "Success!");
+                    Log.d("TimerOutput", "Elapsed time: " + whiskeyTimer.elapsedTime() + " milliseconds");
+                    trialTimes[trialLoopValue] = whiskeyTimer.elapsedTime();
+                    firstKeyEvent = true; // Set true for next trial
+                    trialTimes[trialLoopValue] = whiskeyTimer.elapsedTime();
+                    trialLoopValue++;
+                    counterTemp = 0;
+                    counterText.setText(0 + "%");
+                    if (trialLoopValue == resultNum.length) {
+                        sendToReport();
+                    }
+                }
 
             }, 500);
         }
@@ -216,23 +218,23 @@ public class Whiskey_main extends Activity{
             handler.removeCallbacks(counterUpdater);
             // Post a delayed callback to check after 800ms
             handler.postDelayed(() -> {
-                    if (counterTemp == resultNum[trialLoopValue]) { //Replace second counterTemp with actual test value
-                        if (trialLoopValue < 3){
-                            trialNum++;
-                            trialText.setText("Trial " + trialNum + ": Get the number " + resultNum[trialLoopValue + 1]);
-                        }
-                        whiskeyTimer.stop();
-                        Log.d("Result", "Success!");
-                        Log.d("TimerOutput", "Elapsed time: " + whiskeyTimer.elapsedTime() + " milliseconds");
-                        firstKeyEvent = true; // Set true for next trial
-                        trialTimes[trialLoopValue] = whiskeyTimer.elapsedTime();
-                        trialLoopValue++;
-                        counterTemp = 0;
-                        counterText.setText(0 + "%");
-                        if (trialLoopValue == resultNum.length){
-                            sendToReport();
-                        }
+                if (counterTemp == resultNum[trialLoopValue]) { //Replace second counterTemp with actual test value
+                    if (trialLoopValue < 3) {
+                        trialNum++;
+                        trialText.setText("Trial " + trialNum + ": Get the number " + resultNum[trialLoopValue + 1]);
                     }
+                    whiskeyTimer.stop();
+                    Log.d("Result", "Success!");
+                    Log.d("TimerOutput", "Elapsed time: " + whiskeyTimer.elapsedTime() + " milliseconds");
+                    firstKeyEvent = true; // Set true for next trial
+                    trialTimes[trialLoopValue] = whiskeyTimer.elapsedTime();
+                    trialLoopValue++;
+                    counterTemp = 0;
+                    counterText.setText(0 + "%");
+                    if (trialLoopValue == resultNum.length) {
+                        sendToReport();
+                    }
+                }
 
             }, 500);
 
@@ -272,7 +274,6 @@ public class Whiskey_main extends Activity{
         i.putExtras(b2);
         startActivity(i);
     }
-
 
 
 }

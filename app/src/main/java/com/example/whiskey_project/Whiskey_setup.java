@@ -11,14 +11,14 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
 //base code for setup page implementation taken from Demo_TiltBall
-public class Whiskey_setup extends Activity{
+public class Whiskey_setup extends Activity {
     String[] PARTICIPANT_CODE = {"P01", "P02", "P03", "P04", "P05", "P06", "P07", "P08", "P09", "P10"};
     String[] SESSION_CODE = {"S01", "S02", "S03", "S04", "S05", "S06", "S07", "S08"};
-    String[] GROUP_CODE= {"G01P", "G02P", "G01", "G02"};
+    String[] GROUP_CODE = {"G01P", "G02P", "G01", "G02"};
     Spinner spinParticipantCode;
     Spinner spinSessionCode, spinGroupCode, spinHand;
     SharedPreferences sp;
-    final static String[] HAND = {"Left","Right"};
+    final static String[] HAND = {"Left", "Right"};
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -45,7 +45,7 @@ public class Whiskey_setup extends Activity{
     }
 
     // called when the "OK" button is tapped
-    public void clickOK(View view){
+    public void clickOK(View view) {
 
         String participantCode = PARTICIPANT_CODE[spinParticipantCode.getSelectedItemPosition()];
         String sessionCode = SESSION_CODE[spinSessionCode.getSelectedItemPosition()];
@@ -65,8 +65,7 @@ public class Whiskey_setup extends Activity{
     }
 
     // Called when the "Exit" button is pressed.
-    public void clickExit(View view)
-    {
+    public void clickExit(View view) {
         super.onDestroy(); // cleanup
         this.finish(); // terminate
     }

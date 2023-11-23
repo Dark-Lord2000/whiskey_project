@@ -1,4 +1,5 @@
 package com.example.whiskey_project;
+
 public class Whiskey_timer {
     private long startTime = 0;
     private long stopTime = 0;
@@ -17,13 +18,12 @@ public class Whiskey_timer {
     }
 
     // get elapsed time between start and end of seekbar interaction
-    public long elapsedTime(){
+    public long elapsedTime() {
         long elapsed;
 
-        if(running){
+        if (running) {
             elapsed = (System.currentTimeMillis() - startTime);
-        }
-        else {
+        } else {
             elapsed = (stopTime - startTime);
         }
 
