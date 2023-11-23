@@ -119,6 +119,7 @@ public class Whiskey_main extends Activity{
                     firstKeyEvent = true; // Set true for next trial
                     trialTimes[trialLoopValue] = whiskeyTimer.elapsedTime();
                     Log.d("TimerOutput", "Elapsed time: " + whiskeyTimer.elapsedTime() + " milliseconds");
+                    trialTimes[trialLoopValue] = whiskeyTimer.elapsedTime();
                     trialLoopValue++;
                     seekBar.setProgress(0);
                     if (trialLoopValue == resultNum.length){
@@ -196,6 +197,7 @@ public class Whiskey_main extends Activity{
                         Log.d("TimerOutput", "Elapsed time: " + whiskeyTimer.elapsedTime() + " milliseconds");
                         trialTimes[trialLoopValue] = whiskeyTimer.elapsedTime();
                         firstKeyEvent = true; // Set true for next trial
+                        trialTimes[trialLoopValue] = whiskeyTimer.elapsedTime();
                         trialLoopValue++;
                         counterTemp = 0;
                         counterText.setText(0 + "%");
@@ -223,6 +225,7 @@ public class Whiskey_main extends Activity{
                         Log.d("Result", "Success!");
                         Log.d("TimerOutput", "Elapsed time: " + whiskeyTimer.elapsedTime() + " milliseconds");
                         firstKeyEvent = true; // Set true for next trial
+                        trialTimes[trialLoopValue] = whiskeyTimer.elapsedTime();
                         trialLoopValue++;
                         counterTemp = 0;
                         counterText.setText(0 + "%");
