@@ -134,42 +134,44 @@ public class Whiskey_main extends Activity{
     public boolean dispatchKeyEvent(KeyEvent e) {
         int action = e.getAction();
         int keyCode = e.getKeyCode();
-
-        switch (keyCode) {
-            case KeyEvent.KEYCODE_VOLUME_DOWN:
-                if (action == KeyEvent.ACTION_DOWN) {
-                    if (firstKeyEvent == true) {
-                        firstKeyEvent = false;
-                        whiskeyTimer.start();
-                    }
-
-                    if (counterTemp > 0) {
-                        counterTemp--;
-                        isVolumeDownPressed = true;
-                        counterText.setText(counterTemp + "%");
-                        handler.postDelayed(counterUpdater, 100); // Initial delay before acceleration starts
-                    }
-                    return true;
-                }
-                break;
-
-            case KeyEvent.KEYCODE_VOLUME_UP:
-                if (action == KeyEvent.ACTION_DOWN) {
-                    if (firstKeyEvent == true) {
-                        firstKeyEvent = false;
-                        whiskeyTimer.start();
-                    }
-
-                    if (counterTemp < 100) {
-                        counterTemp++;
-                        isVolumeUpPressed = true;
-                        counterText.setText(counterTemp + "%");
-                        handler.postDelayed(counterUpdater, 100); // Initial delay before acceleration starts
-                    }
-                    return true;
-                }
-                break;
+        if (groupCode.equals(("G01")) || groupCode.equals(("G01P"))) {
+            return true;
         }
+            switch (keyCode) {
+                case KeyEvent.KEYCODE_VOLUME_DOWN:
+                    if (action == KeyEvent.ACTION_DOWN) {
+                        if (firstKeyEvent == true) {
+                            firstKeyEvent = false;
+                            whiskeyTimer.start();
+                        }
+
+                        if (counterTemp > 0) {
+                            counterTemp--;
+                            isVolumeDownPressed = true;
+                            counterText.setText(counterTemp + "%");
+                            handler.postDelayed(counterUpdater, 100); // Initial delay before acceleration starts
+                        }
+                        return true;
+                    }
+                    break;
+
+                case KeyEvent.KEYCODE_VOLUME_UP:
+                    if (action == KeyEvent.ACTION_DOWN) {
+                        if (firstKeyEvent == true) {
+                            firstKeyEvent = false;
+                            whiskeyTimer.start();
+                        }
+
+                        if (counterTemp < 100) {
+                            counterTemp++;
+                            isVolumeUpPressed = true;
+                            counterText.setText(counterTemp + "%");
+                            handler.postDelayed(counterUpdater, 100); // Initial delay before acceleration starts
+                        }
+                        return true;
+                    }
+                    break;
+            }
         return super.dispatchKeyEvent(e);
     }
 
@@ -195,6 +197,8 @@ public class Whiskey_main extends Activity{
                         trialTimes[trialLoopValue] = whiskeyTimer.elapsedTime();
                         firstKeyEvent = true; // Set true for next trial
                         trialLoopValue++;
+                        counterTemp = 0;
+                        counterText.setText(0 + "%");
                         if (trialLoopValue == resultNum.length){
                             sendToReport();
                         }
@@ -221,6 +225,7 @@ public class Whiskey_main extends Activity{
                         firstKeyEvent = true; // Set true for next trial
                         trialLoopValue++;
                         counterTemp = 0;
+                        counterText.setText(0 + "%");
                         if (trialLoopValue == resultNum.length){
                             sendToReport();
                         }
