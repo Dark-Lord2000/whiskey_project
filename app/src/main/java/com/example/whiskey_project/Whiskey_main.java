@@ -189,7 +189,7 @@ public class Whiskey_main extends Activity {
             handler.removeCallbacks(counterUpdater);
             // Post a delayed callback to check after 500ms
             handler.postDelayed(() -> {
-                if (counterTemp == resultNum[trialLoopValue]) { //Replace second counterTemp with actual test value
+                if (trialLoopValue < resultNum.length && counterTemp == resultNum[trialLoopValue]) { //Replace second counterTemp with actual test value
                     if (trialLoopValue < 3) {
                         trialNum++;
                         trialText.setText("Trial " + trialNum + ": Get the number " + resultNum[trialLoopValue + 1]);
@@ -199,7 +199,6 @@ public class Whiskey_main extends Activity {
                     Log.d("TimerOutput", "Elapsed time: " + whiskeyTimer.elapsedTime() + " milliseconds");
                     trialTimes[trialLoopValue] = whiskeyTimer.elapsedTime();
                     firstKeyEvent = true; // Set true for next trial
-                    trialTimes[trialLoopValue] = whiskeyTimer.elapsedTime();
                     trialLoopValue++;
                     counterTemp = 0;
                     counterText.setText(0 + "%");
@@ -218,7 +217,7 @@ public class Whiskey_main extends Activity {
             handler.removeCallbacks(counterUpdater);
             // Post a delayed callback to check after 800ms
             handler.postDelayed(() -> {
-                if (counterTemp == resultNum[trialLoopValue]) { //Replace second counterTemp with actual test value
+                if (trialLoopValue < resultNum.length && counterTemp == resultNum[trialLoopValue]) { //Replace second counterTemp with actual test value
                     if (trialLoopValue < 3) {
                         trialNum++;
                         trialText.setText("Trial " + trialNum + ": Get the number " + resultNum[trialLoopValue + 1]);
@@ -226,8 +225,8 @@ public class Whiskey_main extends Activity {
                     whiskeyTimer.stop();
                     Log.d("Result", "Success!");
                     Log.d("TimerOutput", "Elapsed time: " + whiskeyTimer.elapsedTime() + " milliseconds");
-                    firstKeyEvent = true; // Set true for next trial
                     trialTimes[trialLoopValue] = whiskeyTimer.elapsedTime();
+                    firstKeyEvent = true; // Set true for next trial
                     trialLoopValue++;
                     counterTemp = 0;
                     counterText.setText(0 + "%");
