@@ -22,6 +22,8 @@ public class Whiskey_report extends Activity {
     // get parameters from setup
     long trialTimes[];
 
+    long trialTimeAvg;
+
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,23 +35,25 @@ public class Whiskey_report extends Activity {
         volSide= b.getString("volSide");
         hand = b.getString("hand");
         trialTimes = b.getLongArray("trialTimes");
+        trialTimeAvg = b.getLong("trialTimeAvg");
+
         Log.d("Trial times", "Trial times: " + trialTimes[0] + ", " + trialTimes[1] + ", " + trialTimes[2] + ", " + trialTimes[3]);
 
 
         TextView resultID = findViewById(R.id.paramID);
-        resultID.setText(String.format(participantCode + "|" + sessionCode + "|" + groupCode + "|" + volSide + "|" + hand));
+        resultID.setText(String.format(participantCode + "|" + groupCode + "|" + sessionCode + "|" + volSide + "|" + hand));
         TextView result1View = findViewById(R.id.paramResult1);
         result1View.setText((String.valueOf(trialTimes[0])) + " milliseconds");
-
-
         TextView result2View = findViewById(R.id.paramResult2);
         result2View.setText((String.valueOf(trialTimes[1])) + " milliseconds");
         TextView result3View = findViewById(R.id.paramResult3);
         result3View.setText((String.valueOf(trialTimes[2])) + " milliseconds");
         TextView result4View = findViewById(R.id.paramResult4);
         result4View.setText((String.valueOf(trialTimes[3])) + " milliseconds");
+        TextView resultAvgView = findViewById(R.id.paramAvg);
+        resultAvgView.setText((String.valueOf(trialTimeAvg + " milliseconds")));
 
-        String content = buildtxt(participantCode, sessionCode, groupCode, volSide, hand, trialTimes);// need to build
+        String content = buildtxt(participantCode, sessionCode, groupCode, volSide, hand, trialTimes, trialTimeAvg);// need to build
         String filename = String.format("%s-%s-%s", participantCode, sessionCode, groupCode);
         // make a working directory (if necessary) to store data files
         try {
@@ -84,10 +88,10 @@ public class Whiskey_report extends Activity {
         finish();
     }
 
-    public String buildtxt(String participantCode, String sessionCode, String groupCode, String volSide, String hand, long[] trialTimes) {
+    public String buildtxt(String participantCode, String groupCode, String sessionCode, String volSide, String hand, long[] trialTimes, long trialTimeAvg) {
 
 
-        String txt = String.format("PartcipantCode: %s Group Code: %s session: code %s hand: %s \nTrial 1 %s \nTrial 2 %s \nTrial 3 %s \nTrial 4 %s \n ", participantCode, groupCode, sessionCode, volSide, hand, trialTimes[0], trialTimes[1], trialTimes[2], trialTimes[3]);
+        String txt = String.format("Partcipant Code: %s Group Code: %s Session code: %s Vol. button side: %s hand: %s \nTrial 1 %s \nTrial 2 %s \nTrial 3 %s \nTrial 4 %s \n Average %s \n", participantCode, groupCode, sessionCode, volSide, hand, trialTimes[0], trialTimes[1], trialTimes[2], trialTimes[3], trialTimeAvg);
 
 
         return txt;

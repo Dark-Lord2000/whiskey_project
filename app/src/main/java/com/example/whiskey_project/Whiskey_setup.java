@@ -13,8 +13,8 @@ import android.widget.Spinner;
 //base code for setup page implementation taken from Demo_TiltBall
 public class Whiskey_setup extends Activity {
     String[] PARTICIPANT_CODE = {"P01", "P02", "P03", "P04", "P05", "P06", "P07", "P08", "P09", "P10"};
-    String[] SESSION_CODE = {"S01", "S02", "S03", "S04", "S05", "S06", "S07", "S08"};
-    String[] GROUP_CODE = {"G01P", "G02P", "G01", "G02"};
+    String[] SESSION_CODE = {"S01", "S02", "S03", "S04"};
+    String[] GROUP_CODE = {"G01", "G02"};
     String[] VOL_SIDE= {"N/A", "Vol. Left", "Vol. Right"};
     Spinner spinParticipantCode;
     Spinner spinSessionCode, spinGroupCode, spinVolSide, spinHand;
@@ -30,13 +30,13 @@ public class Whiskey_setup extends Activity {
         ArrayAdapter<CharSequence> adapter = new ArrayAdapter<>(this, R.layout.spinnerstyle, PARTICIPANT_CODE);
         spinParticipantCode.setAdapter(adapter);
 
-        spinSessionCode = (Spinner) findViewById(R.id.spinSessionCode);
-        ArrayAdapter<CharSequence> adapter1 = new ArrayAdapter<>(this, R.layout.spinnerstyle, SESSION_CODE);
-        spinSessionCode.setAdapter(adapter1);
-
         spinGroupCode = (Spinner) findViewById(R.id.spinGroupCode);
         ArrayAdapter<CharSequence> adapter2 = new ArrayAdapter<>(this, R.layout.spinnerstyle, GROUP_CODE);
         spinGroupCode.setAdapter(adapter2);
+
+        spinSessionCode = (Spinner) findViewById(R.id.spinSessionCode);
+        ArrayAdapter<CharSequence> adapter1 = new ArrayAdapter<>(this, R.layout.spinnerstyle, SESSION_CODE);
+        spinSessionCode.setAdapter(adapter1);
 
         spinVolSide = (Spinner) findViewById(R.id.spinVolSide);
         ArrayAdapter<CharSequence> adapter4 = new ArrayAdapter<>(this, R.layout.spinnerstyle, VOL_SIDE);

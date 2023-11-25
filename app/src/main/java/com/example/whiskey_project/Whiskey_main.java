@@ -15,11 +15,13 @@ public class Whiskey_main extends Activity {
 
     private Whiskey_timer whiskeyTimer;
     private SeekBar seekBar;
-    private TextView counterText, groupText, trialText;
+    private TextView counterText, groupText, sessionText, trialText;
     private Handler handler = new Handler();
     int counterTemp = 0;
     int trialNum = 1;
     long[] trialTimes = {0, 0, 0, 0};
+
+    long trialTimeAvg = 0;
     private boolean isVolumeDownPressed;
     private boolean isVolumeUpPressed;
     private boolean firstKeyEvent;
@@ -46,18 +48,28 @@ public class Whiskey_main extends Activity {
          */
         if (groupCode.equals("G01")) {
             groupText.setText("Group 1");
-        } else if (groupCode.equals("G02")) {
+        } else {
+            groupText.setText("Group 2");
+        }
+
+        if (groupCode.equals("G02")) {
             groupText.setText("Group 2");
             seekBar.setVisibility(seekBar.INVISIBLE);
-        } else if (groupCode.equals(("G01P"))) {
-            groupText.setText("Group 1 Practice");
+        }
+        if (sessionCode.equals("S01")){
+            sessionText.setText("Session 1: Seekbar Practice");
+        } else if (sessionCode.equals("S02")){
+            sessionText.setText("Session 2: Seekbar");
+        } else if (sessionCode.equals(("S03"))) {
+            seekBar.setVisibility(seekBar.INVISIBLE);
+            sessionText.setText("Session 3: Volume Practice");
             resultNum[0] = 85;
             resultNum[1] = 12;
             resultNum[2] = 61;
             resultNum[3] = 43;
         } else {
             seekBar.setVisibility(seekBar.INVISIBLE);
-            groupText.setText("Group 2 Practice");
+            sessionText.setText("Session 4: Volume");
             resultNum[0] = 85;
             resultNum[1] = 12;
             resultNum[2] = 61;
@@ -81,6 +93,7 @@ public class Whiskey_main extends Activity {
 
         counterText = (TextView) findViewById(R.id.counterText);
         groupText = (TextView) findViewById(R.id.groupNum);
+        sessionText = (TextView) findViewById(R.id.sessionNum);
         trialText = (TextView) findViewById(R.id.trialNum);
         seekBar = (SeekBar) findViewById(R.id.seekBar);
         // setup seekBar listener
@@ -138,7 +151,7 @@ public class Whiskey_main extends Activity {
     public boolean dispatchKeyEvent(KeyEvent e) {
         int action = e.getAction();
         int keyCode = e.getKeyCode();
-        if (groupCode.equals(("G01")) || groupCode.equals(("G01P"))) {
+        if (sessionCode.equals(("S01")) || sessionCode.equals(("S02"))) {
             return true;
         }
         switch (keyCode) {
@@ -263,6 +276,7 @@ public class Whiskey_main extends Activity {
 
     public void sendToReport() {
         Log.d("Result", "Sending to Whiskey_report");
+        trialTimeAvg = (trialTimes[0] + trialTimes[1] + trialTimes[2] + trialTimes[3]) / 4;
         Bundle b2 = new Bundle();
         b2.putString("participantCode", participantCode);
         b2.putString("sessionCode", sessionCode);
@@ -270,6 +284,7 @@ public class Whiskey_main extends Activity {
         b2.putString("volSide", volSide);
         b2.putString("hand", hand);
         b2.putLongArray("trialTimes", trialTimes);
+        b2.putLong("trialTimeAvg", trialTimeAvg);
 
         Intent i = new Intent(Whiskey_main.this, Whiskey_report.class);
         i.putExtras(b2);

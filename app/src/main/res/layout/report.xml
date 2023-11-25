@@ -28,6 +28,7 @@
             android:paddingTop="20dp"
             android:paddingRight="10dp"
             android:paddingBottom="20dp"
+            android:textColor="@color/white"
             android:text="Report"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textSize="25sp" />
@@ -36,6 +37,7 @@
             android:id="@+id/paramID"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="@color/white"
             android:text="TextView" />
 
         <TableLayout
@@ -49,8 +51,9 @@
 
                 <TextView
                     android:id="@+id/paramLabelResult1"
-                    android:gravity="right"
+                    android:gravity="left"
                     android:paddingRight="5dp"
+                    android:textColor="@color/white"
                     android:text="Trial 1: "
                     android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -58,6 +61,7 @@
                     android:id="@+id/paramResult1"
                     android:gravity="right"
                     android:paddingRight="5dp"
+                    android:textColor="@color/white"
                     android:text="Result 1"
                     android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -67,8 +71,9 @@
 
                 <TextView
                     android:id="@+id/paramLabelResult2"
-                    android:gravity="right"
+                    android:gravity="left"
                     android:paddingRight="5dp"
+                    android:textColor="@color/white"
                     android:text="Trial 2: "
                     android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -77,6 +82,7 @@
                     android:gravity="right"
                     android:paddingRight="5dp"
                     android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textColor="@color/white"
                     tools:text="Result 2" />
 
             </TableRow>
@@ -85,8 +91,9 @@
 
                 <TextView
                     android:id="@+id/paramLabelResult3"
-                    android:gravity="right"
+                    android:gravity="left"
                     android:paddingRight="5dp"
+                    android:textColor="@color/white"
                     android:text="Trial 3: "
                     android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -94,6 +101,7 @@
                     android:id="@+id/paramResult3"
                     android:gravity="right"
                     android:paddingRight="5dp"
+                    android:textColor="@color/white"
                     android:text='Result 3'
                     android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -103,8 +111,9 @@
 
                 <TextView
                     android:id="@+id/paramLabelResult4"
-                    android:gravity="right"
+                    android:gravity="left"
                     android:paddingRight="5dp"
+                    android:textColor="@color/white"
                     android:text="Trial 4: "
                     android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -112,7 +121,28 @@
                     android:id="@+id/paramResult4"
                     android:gravity="right"
                     android:paddingRight="5dp"
+                    android:textColor="@color/white"
                     android:text="Result 4"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    android:id="@+id/paramLabelResultAvg"
+                    android:gravity="left"
+                    android:paddingRight="5dp"
+                    android:textColor="@color/white"
+                    android:text="Average: "
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <TextView
+                    android:id="@+id/paramAvg"
+                    android:gravity="right"
+                    android:paddingRight="5dp"
+                    android:textColor="@color/white"
+                    android:text="Result Avg."
                     android:textAppearance="?android:attr/textAppearanceMedium" />
 
             </TableRow>
