@@ -58,6 +58,10 @@ public class Whiskey_main extends Activity {
         }
         if (sessionCode.equals("S01")){
             sessionText.setText("Session 1: Seekbar Practice");
+            resultNum[0] = 85;
+            resultNum[1] = 12;
+            resultNum[2] = 61;
+            resultNum[3] = 43;
         } else if (sessionCode.equals("S02")){
             sessionText.setText("Session 2: Seekbar");
         } else if (sessionCode.equals(("S03"))) {
@@ -70,10 +74,6 @@ public class Whiskey_main extends Activity {
         } else {
             seekBar.setVisibility(seekBar.INVISIBLE);
             sessionText.setText("Session 4: Volume");
-            resultNum[0] = 85;
-            resultNum[1] = 12;
-            resultNum[2] = 61;
-            resultNum[3] = 43;
         }
 
         Log.d("resultNum", "resultNum: " + resultNum[0] + ", " + resultNum[1] + ", " + resultNum[2] + ", " + resultNum[3]);
