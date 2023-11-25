@@ -17,7 +17,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 
 public class Whiskey_report extends Activity {
-    String participantCode, sessionCode, groupCode, hand;
+    String participantCode, sessionCode, groupCode, volSide, hand;
     // get parameters selected by user from setup dialog
     // get parameters from setup
     long trialTimes[];
@@ -30,13 +30,14 @@ public class Whiskey_report extends Activity {
         participantCode = b.getString("participantCode");
         sessionCode = b.getString("sessionCode");
         groupCode = b.getString("groupCode");
+        volSide= b.getString("volSide");
         hand = b.getString("hand");
         trialTimes = b.getLongArray("trialTimes");
         Log.d("Trial times", "Trial times: " + trialTimes[0] + ", " + trialTimes[1] + ", " + trialTimes[2] + ", " + trialTimes[3]);
 
 
         TextView resultID = findViewById(R.id.paramID);
-        resultID.setText(String.format(participantCode + "|" + sessionCode + "|" + groupCode + "|" + hand));
+        resultID.setText(String.format(participantCode + "|" + sessionCode + "|" + groupCode + "|" + volSide + "|" + hand));
         TextView result1View = findViewById(R.id.paramResult1);
         result1View.setText((String.valueOf(trialTimes[0])) + " milliseconds");
 
@@ -48,7 +49,7 @@ public class Whiskey_report extends Activity {
         TextView result4View = findViewById(R.id.paramResult4);
         result4View.setText((String.valueOf(trialTimes[3])) + " milliseconds");
 
-        String content = buildtxt(participantCode, sessionCode, groupCode, hand, trialTimes);// need to build
+        String content = buildtxt(participantCode, sessionCode, groupCode, volSide, hand, trialTimes);// need to build
         String filename = String.format("%s-%s-%s", participantCode, sessionCode, groupCode);
         // make a working directory (if necessary) to store data files
         try {
@@ -83,10 +84,10 @@ public class Whiskey_report extends Activity {
         finish();
     }
 
-    public String buildtxt(String participantCode, String sessionCode, String groupCode, String hand, long[] trialTimes) {
+    public String buildtxt(String participantCode, String sessionCode, String groupCode, String volSide, String hand, long[] trialTimes) {
 
 
-        String txt = String.format("PartcipantCode: %s Group Code: %s session: code %s hand: %s \nTrial 1 %s \nTrial 2 %s \nTrial 3 %s \nTrial 4 %s \n ", participantCode, groupCode, sessionCode, hand, trialTimes[0], trialTimes[1], trialTimes[2], trialTimes[3]);
+        String txt = String.format("PartcipantCode: %s Group Code: %s session: code %s hand: %s \nTrial 1 %s \nTrial 2 %s \nTrial 3 %s \nTrial 4 %s \n ", participantCode, groupCode, sessionCode, volSide, hand, trialTimes[0], trialTimes[1], trialTimes[2], trialTimes[3]);
 
 
         return txt;

@@ -26,7 +26,7 @@ public class Whiskey_main extends Activity {
     int trialLoopValue = 0; // Shared Loop value
 
     // parameters from Setup dialog
-    String participantCode, sessionCode, groupCode, hand;
+    String participantCode, sessionCode, groupCode, volSide, hand;
 
     // numbers that users will have to get in the trials
     int[] resultNum = {23, 94, 36, 19};
@@ -75,6 +75,7 @@ public class Whiskey_main extends Activity {
         Bundle b = getIntent().getExtras();
         participantCode = b.getString("participantCode");
         sessionCode = b.getString("sessionCode");
+        volSide = b.getString("volSide");
         groupCode = b.getString("groupCode");
         hand = b.getString("hand");
 
@@ -266,6 +267,7 @@ public class Whiskey_main extends Activity {
         b2.putString("participantCode", participantCode);
         b2.putString("sessionCode", sessionCode);
         b2.putString("groupCode", groupCode);
+        b2.putString("volSide", volSide);
         b2.putString("hand", hand);
         b2.putLongArray("trialTimes", trialTimes);
 

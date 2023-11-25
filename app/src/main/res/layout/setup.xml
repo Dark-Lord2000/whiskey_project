@@ -87,6 +87,22 @@
             <TableRow>
 
                 <TextView
+                    android:id="@+id/paramLabelVolumeSide"
+                    android:gravity="right"
+                    android:paddingRight="5dp"
+                    android:text="Vol. Button Side"
+                    android:textAppearance="?android:attr/textAppearanceMedium"/>
+
+                <Spinner
+                    android:id="@+id/spinVolSide"
+                    android:layout_weight="1"
+                    android:gravity="left"
+                    android:textAppearance="?android:attr/textAppearanceMedium"/>
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
                     android:id="@+id/paramLabelHand"
                     android:gravity="right"
                     android:paddingRight="5dp"
