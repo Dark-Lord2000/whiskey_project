@@ -55,7 +55,7 @@ public class Whiskey_setup extends Activity {
         String participantCode = PARTICIPANT_CODE[spinParticipantCode.getSelectedItemPosition()];
         String sessionCode = SESSION_CODE[spinSessionCode.getSelectedItemPosition()];
         String groupCode = GROUP_CODE[spinGroupCode.getSelectedItemPosition()];
-        String volSide = VOL_SIDE[spinGroupCode.getSelectedItemPosition()];
+        String volSide = VOL_SIDE[spinVolSide.getSelectedItemPosition()];
         String hand = HAND[spinHand.getSelectedItemPosition()];
 
         Bundle b = new Bundle();
