@@ -54,7 +54,6 @@ public class Whiskey_main extends Activity {
 
         if (groupCode.equals("G02")) {
             groupText.setText("Group 2");
-            seekBar.setVisibility(seekBar.INVISIBLE);
         }
         if (sessionCode.equals("S01")){
             sessionText.setText("Session 1: Seekbar Practice");
