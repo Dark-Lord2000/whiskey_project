@@ -15,7 +15,7 @@ public class Whiskey_setup extends Activity {
     String[] PARTICIPANT_CODE = {"P01", "P02", "P03", "P04", "P05", "P06", "P07", "P08", "P09", "P10"};
     String[] SESSION_CODE = {"S01", "S02", "S03", "S04"};
     String[] GROUP_CODE = {"G01", "G02"};
-    String[] VOL_SIDE= {"N/A", "Vol. Left", "Vol. Right"};
+    String[] VOL_SIDE= {"Vol. Left", "Vol. Right"};
     Spinner spinParticipantCode;
     Spinner spinSessionCode, spinGroupCode, spinVolSide, spinHand;
     SharedPreferences sp;
